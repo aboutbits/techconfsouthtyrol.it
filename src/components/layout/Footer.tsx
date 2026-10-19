@@ -1,0 +1,98 @@
+import { ReactNode } from 'react'
+import { site } from '../../data/site'
+import {
+  IconArrowRight,
+  IconDiscord,
+  IconLinkedIn,
+  IconMail,
+  IconX,
+} from '../icons/Icons'
+import { Logo } from '../shared/Logo'
+
+const channels = [
+  {
+    href: `mailto:${site.email}`,
+    // The address can break after the @ on narrow screens.
+    label: (
+      <>
+        {site.email.split('@')[0]}@<wbr />
+        {site.email.split('@')[1]}
+      </>
+    ),
+    icon: <IconMail className="size-4" />,
+    external: false,
+  },
+  {
+    href: site.discordUrl,
+    label: 'Discord',
+    icon: <IconDiscord className="size-4" />,
+    external: true,
+  },
+  {
+    href: site.linkedInUrl,
+    label: 'LinkedIn',
+    icon: <IconLinkedIn className="size-4" />,
+    external: true,
+  },
+  {
+    href: site.twitterUrl,
+    label: site.twitterHandle,
+    icon: <IconX className="size-4" />,
+    external: true,
+  },
+  {
+    href: site.techTalksUrl,
+    label: site.techTalksName,
+    icon: <IconArrowRight className="size-4" />,
+    external: true,
+  },
+]
+
+export function Footer() {
+  return (
+    <footer className="bg-navy text-white">
+      <div className="mx-auto grid max-w-content grid-cols-[auto_1fr] gap-x-12 gap-y-10 border-t border-white/10 px-4 py-12 md:grid-cols-[1fr_auto] md:gap-16 md:px-10 lg:gap-24">
+        <div className="col-span-2 md:col-span-1">
+          <div className="flex items-center gap-4">
+            <Logo className="w-14 shrink-0" />
+            <p className="max-w-xs text-sm text-slate-muted">
+              A tech conference in South Tyrol. Maybe coming in the future.
+            </p>
+          </div>
+        </div>
+        <FooterGroup title="Get in touch" label="Contact">
+          {channels.map((channel) => (
+            <li key={channel.href}>
+              <a
+                href={channel.href}
+                target={channel.external ? '_blank' : undefined}
+                rel={channel.external ? 'noopener noreferrer' : undefined}
+                className="inline-flex items-center gap-2 hover:underline"
+              >
+                <span className="shrink-0">{channel.icon}</span>
+                <span className="min-w-0">{channel.label}</span>
+              </a>
+            </li>
+          ))}
+        </FooterGroup>
+      </div>
+    </footer>
+  )
+}
+
+type FooterGroupProps = {
+  title: string
+  label: string
+  children: ReactNode
+}
+
+function FooterGroup({ title, label, children }: FooterGroupProps) {
+  return (
+    <nav aria-label={label} className="flex flex-col gap-4">
+      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-muted">
+        {title}
+      </h2>
+      <ul className="flex flex-col gap-3 text-sm">{children}</ul>
+    </nav>
+  )
+}
