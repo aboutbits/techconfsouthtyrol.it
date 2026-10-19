@@ -2,7 +2,7 @@ export const site = {
   name: 'Tech Conf South Tyrol',
   description:
     'A tech conference in South Tyrol. Maybe coming in the future. A project of the community behind Tech Talks South Tyrol.',
-  email: 'info@techtalkssouthtyrol.it',
+  email: 'info@techconfsouthtyrol.it',
   website: 'techconfsouthtyrol.it',
   discordUrl: 'https://discord.gg/Paj6HE9y6D',
   linkedInUrl: 'https://www.linkedin.com/groups/13035143/',
